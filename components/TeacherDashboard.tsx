@@ -16,7 +16,6 @@ interface TeacherDashboardProps {
 
 type SortKey = 'name' | 'grade' | 'room' | 'heroClass' | 'level' | 'xp' | 'gold';
 
-// Extended Icon List for Shop Items
 const ICON_LIST = [
   'fa-star', 'fa-coins', 'fa-shield-halved', 'fa-wand-magic-sparkles', 'fa-hand-holding-heart',
   'fa-file-circle-xmark', 'fa-chair', 'fa-music', 'fa-flask', 'fa-scroll', 'fa-gem', 'fa-crown',
@@ -52,7 +51,6 @@ const TeacherDashboard: React.FC<TeacherDashboardProps> = ({
   const [formClass, setFormClass] = useState<HeroClass>(HeroClass.WARRIOR);
   const [formAvatar, setFormAvatar] = useState(CARTOON_AVATARS[0]);
 
-  // Sync tab with props from Sidebar
   useEffect(() => {
     setActiveTab(initialTab);
   }, [initialTab]);
@@ -221,7 +219,6 @@ const TeacherDashboard: React.FC<TeacherDashboardProps> = ({
       : <i className="fa-solid fa-sort-down ml-1 text-teal-400"></i>;
   };
 
-  // Treasury Management (Shop Items)
   const handleSaveShopItem = (e: React.FormEvent) => {
     e.preventDefault();
     if (!shopForm.name || !shopForm.price) return alert('กรุณากรอกข้อมูลไอเทมให้ครบถ้วน');
@@ -254,7 +251,6 @@ const TeacherDashboard: React.FC<TeacherDashboardProps> = ({
     setIsManagingShop(true);
   };
 
-  // Attendance Management
   const todayDate = new Date().toISOString().split('T')[0];
 
   const handleAttendance = (id: string) => {
@@ -288,7 +284,6 @@ const TeacherDashboard: React.FC<TeacherDashboardProps> = ({
 
   return (
     <div className="space-y-8 animate-in fade-in duration-700">
-      {/* 👑 Master Header - Bento Grid Stats */}
       <section className="grid grid-cols-1 md:grid-cols-4 gap-6">
         <div className="md:col-span-2 glass p-8 rounded-[3rem] text-white flex flex-col justify-between relative overflow-hidden group shadow-2xl border border-white/10">
           <div className="absolute top-0 right-0 w-64 h-64 bg-teal-500/20 rounded-full blur-3xl -mr-32 -mt-32"></div>
@@ -323,7 +318,6 @@ const TeacherDashboard: React.FC<TeacherDashboardProps> = ({
         </div>
       </section>
 
-      {/* 🧭 Tabs Navigation */}
       <nav className="flex flex-wrap glass p-2 rounded-[2.5rem] w-fit shadow-xl border border-white/5 gap-2 overflow-x-auto no-scrollbar">
         {[
           { id: 'ARENA', label: 'สนามฝึกซ้อม', icon: 'fa-swords' },
@@ -349,7 +343,6 @@ const TeacherDashboard: React.FC<TeacherDashboardProps> = ({
       </nav>
 
       <div className="min-h-[600px]">
-        {/* 🏟️ ARENA VIEW */}
         {activeTab === 'ARENA' && (
           <div className="space-y-6 animate-in slide-in-from-bottom-4 duration-500">
              <div className="flex flex-wrap gap-4 items-center glass p-4 rounded-[2rem] border border-white/10">
@@ -405,7 +398,6 @@ const TeacherDashboard: React.FC<TeacherDashboardProps> = ({
           </div>
         )}
 
-        {/* 📅 ATTENDANCE VIEW */}
         {activeTab === 'ATTENDANCE' && (
           <div className="space-y-6 animate-in slide-in-from-bottom-4 duration-500">
              <div className="flex flex-wrap gap-4 items-center glass p-6 rounded-[3rem] border border-white/10 shadow-xl">
@@ -466,7 +458,6 @@ const TeacherDashboard: React.FC<TeacherDashboardProps> = ({
           </div>
         )}
 
-        {/* 🛠️ MANAGEMENT VIEW */}
         {activeTab === 'MANAGEMENT' && (
           <div className="space-y-6 animate-in slide-in-from-bottom-4 duration-500">
              <div className="flex flex-wrap gap-4 items-center glass p-6 rounded-[3rem] border border-white/10">
@@ -501,7 +492,6 @@ const TeacherDashboard: React.FC<TeacherDashboardProps> = ({
                 </div>
              </div>
 
-             {/* Bulk Action Controls */}
              {selectedIds.size > 0 && (
                <div className="glass p-4 rounded-2xl border border-teal-500/30 flex items-center justify-between animate-in slide-in-from-top-2">
                  <p className="text-sm font-bold text-white ml-4">เลือกผู้กล้าแล้ว {selectedIds.size} ท่าน</p>
@@ -573,7 +563,6 @@ const TeacherDashboard: React.FC<TeacherDashboardProps> = ({
           </div>
         )}
 
-        {/* 📜 CHRONICLES VIEW */}
         {activeTab === 'CHRONICLES' && (
           <div className="glass rounded-[4rem] overflow-hidden border border-white/5 animate-in slide-in-from-bottom-6 duration-500">
             <div className="p-8 border-b border-white/5 flex justify-between items-center">
@@ -608,10 +597,8 @@ const TeacherDashboard: React.FC<TeacherDashboardProps> = ({
           </div>
         )}
 
-        {/* 💰 TREASURY VIEW (Managed Shop Items) */}
         {activeTab === 'TREASURY' && (
           <div className="grid grid-cols-1 lg:grid-cols-5 gap-8 animate-in slide-in-from-bottom-6 duration-500">
-             {/* Quests Sidebar-like section */}
              <div className="lg:col-span-2 glass p-8 rounded-[4rem] space-y-6 border border-white/5 shadow-2xl h-fit">
                 <div className="flex justify-between items-center">
                    <h3 className="text-2xl font-black text-white">ภารกิจกิลด์</h3>
@@ -637,7 +624,6 @@ const TeacherDashboard: React.FC<TeacherDashboardProps> = ({
                 </div>
              </div>
              
-             {/* Shop Items Main Section */}
              <div className="lg:col-span-3 glass p-10 rounded-[4rem] space-y-8 border border-white/5 shadow-2xl">
                 <div className="flex justify-between items-center">
                    <div>
@@ -686,7 +672,6 @@ const TeacherDashboard: React.FC<TeacherDashboardProps> = ({
           </div>
         )}
 
-        {/* Insights & Events Views */}
         {activeTab === 'INSIGHTS' && (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 animate-in slide-in-from-bottom-6 duration-500">
              <div className="glass p-8 rounded-[3rem] space-y-6 border border-white/10">
@@ -753,7 +738,6 @@ const TeacherDashboard: React.FC<TeacherDashboardProps> = ({
         )}
       </div>
 
-      {/* 🛠️ Shop Management Modal */}
       {isManagingShop && (
         <div className="fixed inset-0 z-[120] flex items-center justify-center p-4 bg-slate-900/95 backdrop-blur-2xl animate-in fade-in duration-300">
           <form onSubmit={handleSaveShopItem} className="glass rounded-[4rem] w-full max-w-2xl shadow-2xl overflow-hidden flex flex-col border border-white/10 animate-in zoom-in-95 duration-300">
@@ -770,7 +754,6 @@ const TeacherDashboard: React.FC<TeacherDashboardProps> = ({
             
             <div className="p-10 space-y-8 overflow-y-auto custom-scrollbar">
               <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-                 {/* Visual Preview */}
                  <div className="space-y-4 text-center">
                     <label className="text-[10px] font-black text-slate-500 uppercase tracking-widest block">ไอเทมพรีวิว</label>
                     <div className="w-full aspect-square glass rounded-[2.5rem] flex flex-col items-center justify-center p-6 border-2 border-amber-500/20 shadow-2xl">
@@ -780,7 +763,6 @@ const TeacherDashboard: React.FC<TeacherDashboardProps> = ({
                     </div>
                  </div>
                  
-                 {/* Form Fields */}
                  <div className="md:col-span-2 space-y-6">
                     <div className="space-y-1.5">
                       <label className="text-[10px] font-black text-slate-500 uppercase tracking-widest ml-2">ชื่อไอเทม</label>
@@ -810,7 +792,6 @@ const TeacherDashboard: React.FC<TeacherDashboardProps> = ({
                              <span className="text-[10px] font-black uppercase tracking-widest">คลิกเพื่อเลือก</span>
                              <i className="fa-solid fa-chevron-down ml-auto opacity-30"></i>
                           </div>
-                          {/* Dropdown for Icons */}
                           <div className="absolute top-full left-0 mt-3 p-4 glass rounded-[2.5rem] border border-white/10 hidden group-hover:grid grid-cols-6 gap-3 z-[130] w-full max-h-60 overflow-y-auto shadow-2xl animate-in slide-in-from-top-2">
                             {ICON_LIST.map(icon => (
                               <button key={icon} type="button" onClick={() => setShopForm({ ...shopForm, icon })} className={`w-10 h-10 rounded-xl transition-all flex items-center justify-center border ${shopForm.icon === icon ? 'bg-amber-500 text-white border-amber-500 shadow-lg shadow-amber-500/20' : 'text-slate-400 border-white/5 hover:bg-white/5'}`}>
@@ -842,7 +823,6 @@ const TeacherDashboard: React.FC<TeacherDashboardProps> = ({
         </div>
       )}
 
-      {/* Hero Modal (Arena Action) */}
       {selectedStudent && (
         <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-slate-900/95 backdrop-blur-2xl animate-in fade-in duration-300">
           <div className="glass rounded-[5rem] w-full max-w-2xl shadow-2xl overflow-hidden flex flex-col max-h-[90vh] border border-white/10 animate-in zoom-in-95 duration-300">
@@ -895,7 +875,6 @@ const TeacherDashboard: React.FC<TeacherDashboardProps> = ({
         </div>
       )}
 
-      {/* Add/Edit Hero Modal */}
       {isAdding && (
         <div className="fixed inset-0 z-[110] flex items-center justify-center p-4 bg-slate-900/95 backdrop-blur-2xl animate-in fade-in duration-300">
           <form onSubmit={handleSubmit} className="glass rounded-[4rem] w-full max-w-4xl shadow-2xl overflow-hidden flex flex-col max-h-[90vh] border border-white/10 animate-in zoom-in-95 duration-300">
